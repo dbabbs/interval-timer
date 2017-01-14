@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         
         let milli = UInt8(elapsedTime * 100)
         
-        timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))"
+        timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))" 
     }
 }
 
