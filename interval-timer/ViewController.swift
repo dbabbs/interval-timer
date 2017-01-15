@@ -17,22 +17,32 @@ class ViewController: UIViewController {
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
     
+    @IBOutlet weak var intervalText: UILabel!
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var pickerData: [Int] = [5, 10, 15, 20, 30, 60, 90, 120]
     
-    var interval = 30
+    
+    var interval = 5
     var music = true;
+    var i = 0
     
     @IBOutlet weak var progressView: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        print("The music value is set to: \(music)")
         progressView.setProgress(0, animated: true)
-
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
+        
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +60,6 @@ class ViewController: UIViewController {
         timer.invalidate()
         timerLabel.text = "00:00.00"
         progressView.setProgress(0, animated: false)
-        
     }
     
     
@@ -58,7 +67,10 @@ class ViewController: UIViewController {
         var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
         print(round(elapsedTime))
         
-        
+        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 ) {//&& music && round(elapsedTime) != 0) {
+            playSound()
+            progressView.progress = 0.0
+        }
         
         let minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (TimeInterval(minutes) * 60)
@@ -66,12 +78,7 @@ class ViewController: UIViewController {
         elapsedTime -= TimeInterval(seconds)
         let milli = UInt8(elapsedTime * 100)
         
-        
-        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && music && round(elapsedTime) != 0) {
-            playSound()
-            progressView.progress = 0.0
-        }
-        
+
         //main label:
         timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))" 
         
@@ -89,7 +96,7 @@ class ViewController: UIViewController {
             player.prepareToPlay()
             player.play()
         } catch let error {
-            //print(error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     
@@ -97,6 +104,30 @@ class ViewController: UIViewController {
         music = !music
         
     }
+    
+    func intervalSelect(_ gesture: UIGestureRecognizer) {
+        
+        let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right: //-1
+                if (i - 1 > -1) {
+                    i -= 1
+                }
+            case UISwipeGestureRecognizerDirection.left: //+1
+                if (i + 1 != intervalOptions.count) {
+                    i += 1
+                }
+            default:
+                break
+            }
+            print("after: \(i)")
+            interval = intervalOptions[i]
+            intervalText.text = "\(interval)"
+        }
+    }
+
     
     
 }
