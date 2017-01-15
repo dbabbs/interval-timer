@@ -34,12 +34,11 @@ class ViewController: UIViewController {
         print("The music value is set to: \(music)")
 
         progressView.setProgress(0, animated: false)
-        musicStatus.text = "Sound on"
         intervalText.text = "\(interval)"
 
-        startButton.backgroundColor = UIColor(red: 68/255, green: 219/255, blue: 94/255, alpha: 0.5)
+        startButton.backgroundColor = UIColor(red: 0/255, green: 118/255, blue: 255/255, alpha: 1)
         startButton.layer.cornerRadius = 0.5 * startButton.bounds.size.width
-        stopButton.backgroundColor = UIColor(red: 254/255, green: 56/255, blue: 36/255, alpha: 0.5)
+        stopButton.backgroundColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1)
         stopButton.layer.cornerRadius = 0.5 * stopButton.bounds.size.width
 
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
@@ -82,6 +81,7 @@ class ViewController: UIViewController {
         if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && music && round(elapsedTime) != 0) {
             playSound()
             progressView.progress = 0.0
+            flashScreen()
         }
 
         let minutes = UInt8(elapsedTime / 60.0)
@@ -137,10 +137,10 @@ class ViewController: UIViewController {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.up:
                 music = true
-                musicStatus.text = "Sound on"
+                musicStatus.text = "🎹"
             case UISwipeGestureRecognizerDirection.down:
                 music = false
-                musicStatus.text = "Sound off"
+                musicStatus.text = "❌"
             default:
                 break
             }
@@ -148,25 +148,17 @@ class ViewController: UIViewController {
     }
     
     func flashScreen() {
-        let inDuration: CGDisplayFadeInterval = 0.5
-        let outDuration: CGDisplayFadeInterval = 0.5
-        let color = NSColor.redColor()
-
-        var fadeToken: CGDisplayFadeReservationToken = 0
-        let colorToUse = color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)!
-        let err = CGAcquireDisplayFadeReservation(inDuration + outDuration, &fadeToken)
-        if Int(err) != Int(kCGErrorSuccess.value) {
-            NSLog("Error acquiring fade reservation")
-            return
-        }
-        CGDisplayFade(fadeToken, inDuration,
-            0.0 as CGDisplayBlendFraction, 0.2 as CGDisplayBlendFraction,
-            Float(colorToUse.redComponent), Float(colorToUse.greenComponent), Float(colorToUse.blueComponent),
-            boolean_t(1))
-        CGDisplayFade(fadeToken, inDuration,
-            0.2 as CGDisplayBlendFraction, 0.0 as CGDisplayBlendFraction,
-            Float(colorToUse.redComponent), Float(colorToUse.greenComponent), Float(colorToUse.blueComponent),
-            boolean_t(1))
+        let screenSize = UIScreen.main.bounds
+        let frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
+        let shutterView = UIView(frame: frame)
+        shutterView.backgroundColor = UIColor.white
+        view.addSubview(shutterView)
+        UIView.animate(withDuration: 0.3, animations: {
+            shutterView.alpha = 0.25
+        }, completion: { (_) in
+            shutterView.removeFromSuperview()
+        })
+        print("flashed")
     }
 
 }

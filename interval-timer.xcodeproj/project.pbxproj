@@ -306,6 +306,7 @@
 				A492040B1E2AD9BC00E22BE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
