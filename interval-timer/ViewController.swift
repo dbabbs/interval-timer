@@ -11,37 +11,50 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var timerLabel: UILabel!
-    
     var timer = Timer()
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var intervalText: UILabel!
-    
-    @IBOutlet weak var pickerView: UIPickerView!
-    
-    
-    
-    var interval = 5
-    var music = true;
-    var i = 0
-    
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var musicStatus: UILabel!
+    
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    
+    
+    var interval = 30
+    var music = true;
+    var i = 4
+    let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("The music value is set to: \(music)")
-        progressView.setProgress(0, animated: true)
+        
+        progressView.setProgress(0, animated: false)
+        musicStatus.text = "Sound on"
+        intervalText.text = "\(interval)"
+        
+        startButton.backgroundColor = UIColor(red: 68/255, green: 219/255, blue: 94/255, alpha: 0.5)
+        startButton.layer.cornerRadius = 0.5 * startButton.bounds.size.width
+        stopButton.backgroundColor = UIColor(red: 254/255, green: 56/255, blue: 36/255, alpha: 0.5)
+        stopButton.layer.cornerRadius = 0.5 * stopButton.bounds.size.width
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
-        
         leftSwipe.direction = UISwipeGestureRecognizerDirection.left
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.musicControl))
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.musicControl))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.down
+        upSwipe.direction = UISwipeGestureRecognizerDirection.up
+        view.addGestureRecognizer(downSwipe)
+        view.addGestureRecognizer(upSwipe)
         
     }
 
@@ -62,12 +75,11 @@ class ViewController: UIViewController {
         progressView.setProgress(0, animated: false)
     }
     
-    
     func updateCounter() {
         var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
         print(round(elapsedTime))
         
-        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 ) {//&& music && round(elapsedTime) != 0) {
+        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && music && round(elapsedTime) != 0) {
             playSound()
             progressView.progress = 0.0
         }
@@ -100,15 +112,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func musicOnOff(_ sender: Any) {
-        music = !music
-        
-    }
-    
     func intervalSelect(_ gesture: UIGestureRecognizer) {
-        
-        let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
-        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right: //-1
@@ -125,6 +129,21 @@ class ViewController: UIViewController {
             print("after: \(i)")
             interval = intervalOptions[i]
             intervalText.text = "\(interval)"
+        }
+    }
+    
+    func musicControl(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.up:
+                music = true
+                musicStatus.text = "Sound on"
+            case UISwipeGestureRecognizerDirection.down:
+                music = false
+                musicStatus.text = "Sound off"
+            default:
+                break
+            }
         }
     }
 
