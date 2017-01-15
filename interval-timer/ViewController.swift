@@ -17,14 +17,19 @@ class ViewController: UIViewController {
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
     
-    var interval = 30
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    var pickerData: [Int] = [5, 10, 15, 20, 30, 60, 90, 120]
+    
+    var interval = 30
     var music = true;
     
     @IBOutlet weak var progressView: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         progressView.setProgress(0, animated: true)
 
@@ -92,6 +97,7 @@ class ViewController: UIViewController {
         music = !music
         
     }
+    
     
 }
 
