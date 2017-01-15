@@ -14,48 +14,48 @@ class ViewController: UIViewController {
     var timer = Timer()
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
-    
+
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var intervalText: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var musicStatus: UILabel!
-    
+
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
-    
-    
+
+
     var interval = 30
     var music = true;
     var i = 4
     let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("The music value is set to: \(music)")
-        
+
         progressView.setProgress(0, animated: false)
         musicStatus.text = "Sound on"
         intervalText.text = "\(interval)"
-        
+
         startButton.backgroundColor = UIColor(red: 68/255, green: 219/255, blue: 94/255, alpha: 0.5)
         startButton.layer.cornerRadius = 0.5 * startButton.bounds.size.width
         stopButton.backgroundColor = UIColor(red: 254/255, green: 56/255, blue: 36/255, alpha: 0.5)
         stopButton.layer.cornerRadius = 0.5 * stopButton.bounds.size.width
-        
+
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
         leftSwipe.direction = UISwipeGestureRecognizerDirection.left
         rightSwipe.direction = UISwipeGestureRecognizerDirection.right
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
-        
+
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.musicControl))
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.musicControl))
         downSwipe.direction = UISwipeGestureRecognizerDirection.down
         upSwipe.direction = UISwipeGestureRecognizerDirection.up
         view.addGestureRecognizer(downSwipe)
         view.addGestureRecognizer(upSwipe)
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,51 +67,51 @@ class ViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate
     }
-    
+
 
     @IBAction func stop(_ sender: Any) {
         timer.invalidate()
         timerLabel.text = "00:00.00"
         progressView.setProgress(0, animated: false)
     }
-    
+
     func updateCounter() {
         var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
         print(round(elapsedTime))
-        
+
         if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && music && round(elapsedTime) != 0) {
             playSound()
             progressView.progress = 0.0
         }
-        
+
         let minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (TimeInterval(minutes) * 60)
         let seconds = UInt8(elapsedTime)
         elapsedTime -= TimeInterval(seconds)
         let milli = UInt8(elapsedTime * 100)
-        
+
 
         //main label:
-        timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))" 
-        
+        timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))"
+
         //progress view:
         progressView.progress = Float(seconds).truncatingRemainder(dividingBy: Float(interval)) / Float(interval)
     }
-    
+
     func playSound() {
         let url = Bundle.main.url(forResource: "horn", withExtension: "mp3")!
-        
+
         do {
             player = try AVAudioPlayer(contentsOf: url)
             guard let player = player else { return }
-            
+
             player.prepareToPlay()
             player.play()
         } catch let error {
             print(error.localizedDescription)
         }
     }
-    
+
     func intervalSelect(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
             intervalText.text = "\(interval)"
         }
     }
-    
+
     func musicControl(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
@@ -146,8 +146,27 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    func flashScreen() {
+        let inDuration: CGDisplayFadeInterval = 0.5
+        let outDuration: CGDisplayFadeInterval = 0.5
+        let color = NSColor.redColor()
 
-    
-    
+        var fadeToken: CGDisplayFadeReservationToken = 0
+        let colorToUse = color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)!
+        let err = CGAcquireDisplayFadeReservation(inDuration + outDuration, &fadeToken)
+        if Int(err) != Int(kCGErrorSuccess.value) {
+            NSLog("Error acquiring fade reservation")
+            return
+        }
+        CGDisplayFade(fadeToken, inDuration,
+            0.0 as CGDisplayBlendFraction, 0.2 as CGDisplayBlendFraction,
+            Float(colorToUse.redComponent), Float(colorToUse.greenComponent), Float(colorToUse.blueComponent),
+            boolean_t(1))
+        CGDisplayFade(fadeToken, inDuration,
+            0.2 as CGDisplayBlendFraction, 0.0 as CGDisplayBlendFraction,
+            Float(colorToUse.redComponent), Float(colorToUse.greenComponent), Float(colorToUse.blueComponent),
+            boolean_t(1))
+    }
+
 }
-
