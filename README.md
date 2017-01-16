@@ -2,6 +2,14 @@
 
 ![icon](icon.png)
 
-Swipe left and right to change the interval amount
+## About
 
-Swipe up and down to toggle sound
+Interval timer for workouts. Workout JSON file is updated weekly with new ab workout.
+
+## Features
+- Text to speech with current workout
+- Swipe vertically to switch between no sound (🔇), horn (🔊), US voice (👄), and British voice (🇬🇧)
+- Swipe horizontally to switch between interval periods
+- Screen flash during interval alert
+- Progress bar
+- View current weekly workout plan
