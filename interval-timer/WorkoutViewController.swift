@@ -16,7 +16,7 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
         
         
-        getData()
+        //getData()
 
         // Do any additional setup after loading the view.
     }
@@ -41,13 +41,13 @@ class WorkoutViewController: UIViewController {
                 do {
                     
                     let parsedData = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
-                    let workouts = parsedData["Workout"] as! [String:Any]
+                    let workouts = parsedData["Week 3"] as! [String]
+                    print(workouts)
                     
                     //print("\(workouts) Workout")
-                    for workout in workouts {
-                        let name = workout.value as! [String:Any] 
-                        print(name[1])
-                    }
+                    /*for (key, value) in workouts {
+                        print("\(key) - \(value) ")
+                    }*/
                     
                     
                     //let currentTemperatureF = currentConditions["temperature"] as! Double
