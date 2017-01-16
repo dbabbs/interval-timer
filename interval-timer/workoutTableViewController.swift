@@ -13,7 +13,7 @@ class workoutTableViewController: UITableViewController {
     var TableData:Array< String > = Array < String >()
 
     override func viewDidLoad() {
-        get_data_from_url("http://www.kaleidosblog.com/tutorial/tutorial.json")
+        get_data_from_url("https://dbabbs.github.io/interval-timer/tutorial.json")
 
     
     }
