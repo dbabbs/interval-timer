@@ -38,7 +38,7 @@ class ViewController: UIViewController {
 
         startButton.backgroundColor = UIColor(red: 0/255, green: 118/255, blue: 255/255, alpha: 1)
         startButton.layer.cornerRadius = 0.5 * startButton.bounds.size.width
-        stopButton.backgroundColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1)
+        //stopButton.backgroundColor = UIColor(red: 61/255, green: 61/255, blue: 61/255, alpha: 1)
         stopButton.layer.cornerRadius = 0.5 * stopButton.bounds.size.width
 
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.intervalSelect))
