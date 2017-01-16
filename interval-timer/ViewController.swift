@@ -13,6 +13,9 @@ class ViewController: UIViewController {
 
     let workoutSegueIdentifier = "showWorkoutSegue"
     
+    var timer2 = Timer()
+    var startTime2 = TimeInterval()
+    
     var timer = Timer()
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
@@ -28,7 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
-    var voiceOptions = ["🔇", "🔊", "👄"]
+    var voiceOptions = ["🔇", "🔊", "👄", "🇬🇧"]
     var voiceStatus = "👄"
     var z = 2
 
@@ -37,7 +40,7 @@ class ViewController: UIViewController {
     var music = true;
     var i = 4
     let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
-    var instance = 0
+    var instance = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +51,7 @@ class ViewController: UIViewController {
 
         progressView.setProgress(0, animated: false)
         intervalText.text = "\(interval)"
+        musicStatus.text = voiceStatus
 
         startButton.backgroundColor = UIColor(red: 0/255, green: 118/255, blue: 255/255, alpha: 1)
         startButton.layer.cornerRadius = 0.5 * startButton.bounds.size.width
@@ -77,13 +81,23 @@ class ViewController: UIViewController {
     }
 
     @IBAction func start(_ sender: Any) {
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(ViewController.updateCounterText), userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate
+        
+        timer2 = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
+        startTime2 = NSDate.timeIntervalSinceReferenceDate
+        
     }
     
     func speak(word : String) {
         let utterance = AVSpeechUtterance(string: word)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        var language = ""
+        if voiceStatus == "🇬🇧" {
+            language = "en-gb"
+        } else if voiceStatus == "👄" {
+            language = "en-us"
+        }
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
         utterance.rate = 0.5
         
         let synthesizer = AVSpeechSynthesizer()
@@ -93,20 +107,28 @@ class ViewController: UIViewController {
 
     @IBAction func stop(_ sender: Any) {
         timer.invalidate()
+        timer2.invalidate()
         timerLabel.text = "00:00.00"
         progressView.setProgress(0, animated: false)
     }
 
     func updateCounter() {
         var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
-        print(round(elapsedTime))
+        
+        var elapsedTime2: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime2
+        //print(elapsedTime2)
         var length = activity.count - 1
-
-        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && round(elapsedTime) != 0) {
+        //print(length)
+        
+        var tempRound = round(elapsedTime)
+        //print(tempRound)
+        if (tempRound.truncatingRemainder(dividingBy: Double(interval)) == 0 && round(elapsedTime) != 0) {
             if voiceStatus == "🔊" {
                 playSound()
-            } else if voiceStatus == "👄" {
+            } else if voiceStatus == "👄" || voiceStatus == "🇬🇧"{
                 speak(word: activity[instance])
+                //speak(word: "\(instance)")
+                //print("THIS IS IIIIIIIII: \(instance)")
             }
             progressView.progress = 0.0
             flashScreen()
@@ -116,17 +138,25 @@ class ViewController: UIViewController {
             }
         }
         
-
+        
+    }
+    
+    func updateCounterText() {
+        
+        var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
+        
+        var elapsedTime2: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime2
+        
         let minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (TimeInterval(minutes) * 60)
         let seconds = UInt8(elapsedTime)
         elapsedTime -= TimeInterval(seconds)
         let milli = UInt8(elapsedTime * 100)
-
-
+        
+        
         //main label:
         timerLabel.text = "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds)).\(String(format: "%02d", milli))"
-
+        
         //progress view:
         progressView.progress = Float(seconds).truncatingRemainder(dividingBy: Float(interval)) / Float(interval)
     }
@@ -168,11 +198,11 @@ class ViewController: UIViewController {
     func musicControl(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.down:
+            case UISwipeGestureRecognizerDirection.up:
                 if (z - 1 > -1) {
                     z -= 1
                 }
-            case UISwipeGestureRecognizerDirection.up:
+            case UISwipeGestureRecognizerDirection.down:
                 if (z + 1 != voiceOptions.count) {
                     z += 1
                 }
