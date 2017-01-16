@@ -13,6 +13,7 @@
 		A49204021E2AD9BC00E22BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A49204011E2AD9BC00E22BE0 /* Assets.xcassets */; };
 		A49204051E2AD9BC00E22BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */; };
 		A492040D1E2AE95900E22BE0 /* horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A492040C1E2AE95900E22BE0 /* horn.mp3 */; };
+		A4BC87411E2C6B0600102C3A /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC87401E2C6B0600102C3A /* WorkoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A49204041E2AD9BC00E22BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A49204061E2AD9BC00E22BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A492040C1E2AE95900E22BE0 /* horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = horn.mp3; sourceTree = "<group>"; };
+		A4BC87401E2C6B0600102C3A /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				A49203FC1E2AD9BC00E22BE0 /* ViewController.swift */,
 				A492040C1E2AE95900E22BE0 /* horn.mp3 */,
 				A49203FE1E2AD9BC00E22BE0 /* Main.storyboard */,
+				A4BC87401E2C6B0600102C3A /* WorkoutViewController.swift */,
 				A49204011E2AD9BC00E22BE0 /* Assets.xcassets */,
 				A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */,
 				A49204061E2AD9BC00E22BE0 /* Info.plist */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BC87411E2C6B0600102C3A /* WorkoutViewController.swift in Sources */,
 				A49203FD1E2AD9BC00E22BE0 /* ViewController.swift in Sources */,
 				A49203FB1E2AD9BC00E22BE0 /* AppDelegate.swift in Sources */,
 			);
