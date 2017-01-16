@@ -10,12 +10,11 @@ import UIKit
 
 class workoutTableViewController: UITableViewController {
     
-    var TableData:Array< String > = Array < String >()
+    var activity:Array< String > = Array < String >()
+    var time:Array< String > = Array < String >()
 
     override func viewDidLoad() {
-        get_data_from_url("https://dbabbs.github.io/interval-timer/tutorial.json")
-
-    
+        get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
     }
     
     @IBAction func dismiss() {
@@ -38,21 +37,20 @@ class workoutTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return TableData.count
+        return activity.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = TableData[indexPath.row]
-        cell.detailTextLabel?.text = "DETAIL TEXT"
+        cell.textLabel?.text = activity[indexPath.row]
+        cell.detailTextLabel?.text = time[indexPath.row]
 
         return cell
     }
     
-    func get_data_from_url(_ link:String)
-    {
+    func get_data_from_url(_ link:String) {
         let url:URL = URL(string: link)!
         let session = URLSession.shared
         
@@ -69,65 +67,42 @@ class workoutTableViewController: UITableViewController {
                 
                 return
             }
-            
-            
             self.extract_json(data!)
-            
-            
         }) 
-        
         task.resume()
-        
     }
     
-    func extract_json(_ data: Data)
-    {
-        
-        
+    func extract_json(_ data: Data) {
         let json: Any?
         
-        do
-        {
+        do {
             json = try JSONSerialization.jsonObject(with: data, options: [])
-        }
-        catch
-        {
+        } catch {
             return
         }
         
-        guard let data_list = json as? NSArray else
-        {
+        guard let data_list = json as? NSArray else {
             return
         }
         
         
-        if let countries_list = json as? NSArray
-        {
-            for i in 0 ..< data_list.count
-            {
-                if let country_obj = countries_list[i] as? NSDictionary
-                {
-                    if let country_name = country_obj["country"] as? String
-                    {
-                        if let country_code = country_obj["code"] as? String
-                        {
-                            TableData.append(country_name + " [" + country_code + "]")
+        if let workout_data = json as? NSArray {
+            for i in 0 ..< data_list.count {
+                if let entry = workout_data[i] as? NSDictionary {
+                    if let timeEntry = entry["time"] as? String {
+                        if let activityEntry = entry["activity"] as? String  {
+                            time.append(timeEntry)
+                            activity.append(activityEntry)
                         }
                     }
                 }
             }
         }
-        
-        
-        
-        DispatchQueue.main.async(execute: {self.do_table_refresh()})
-        
+        DispatchQueue.main.async(execute: {self.refresh()})
     }
     
-    func do_table_refresh()
-    {
+    func refresh()  {
         self.tableView.reloadData()
-        
     }
     
 

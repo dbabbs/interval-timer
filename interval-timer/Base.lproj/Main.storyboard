@@ -112,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
-        <!--Workout Table View Controller-->
+        <!--Workout-->
         <scene sceneID="8Yt-y1-QL6">
             <objects>
-                <tableViewController id="uhT-6b-iam" customClass="workoutTableViewController" customModule="interval_timer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Workout" id="uhT-6b-iam" customClass="workoutTableViewController" customModule="interval_timer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1xT-7C-PYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,16 +151,22 @@
                             <outlet property="delegate" destination="uhT-6b-iam" id="YwQ-cE-qOt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="CM8-PR-lCz"/>
+                    <navigationItem key="navigationItem" title="Workout" id="CM8-PR-lCz">
+                        <barButtonItem key="rightBarButtonItem" title="Exit" id="fcL-jI-hui">
+                            <connections>
+                                <action selector="dismiss" destination="uhT-6b-iam" id="2ge-bB-0Zm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0s-7C-oPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1837.5999999999999" y="37.331334332833585"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Workout-->
         <scene sceneID="e1a-Yi-BOC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="daN-58-qny" sceneMemberID="viewController">
+                <navigationController title="Workout" automaticallyAdjustsScrollViewInsets="NO" id="daN-58-qny" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GpT-ne-M9Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
