@@ -14,7 +14,6 @@
 		A49204051E2AD9BC00E22BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */; };
 		A492040D1E2AE95900E22BE0 /* horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A492040C1E2AE95900E22BE0 /* horn.mp3 */; };
 		A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */; };
-		A4BC87451E2C810B00102C3A /* workoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC87441E2C810B00102C3A /* workoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		A49204061E2AD9BC00E22BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A492040C1E2AE95900E22BE0 /* horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = horn.mp3; sourceTree = "<group>"; };
 		A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutTableViewController.swift; sourceTree = "<group>"; };
-		A4BC87441E2C810B00102C3A /* workoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +63,6 @@
 				A492040C1E2AE95900E22BE0 /* horn.mp3 */,
 				A49203FE1E2AD9BC00E22BE0 /* Main.storyboard */,
 				A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */,
-				A4BC87441E2C810B00102C3A /* workoutViewController.swift */,
 				A49204011E2AD9BC00E22BE0 /* Assets.xcassets */,
 				A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */,
 				A49204061E2AD9BC00E22BE0 /* Info.plist */,
@@ -147,7 +144,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4BC87451E2C810B00102C3A /* workoutViewController.swift in Sources */,
 				A49203FD1E2AD9BC00E22BE0 /* ViewController.swift in Sources */,
 				A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */,
 				A49203FB1E2AD9BC00E22BE0 /* AppDelegate.swift in Sources */,

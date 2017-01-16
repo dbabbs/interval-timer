@@ -9,12 +9,14 @@
 import UIKit
 
 class workoutTableViewController: UITableViewController {
-    
+
     var activity:Array< String > = Array < String >()
     var time:Array< String > = Array < String >()
+    var text = String()
 
     override func viewDidLoad() {
         get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
+        print(text)
     }
     
     @IBAction func dismiss() {

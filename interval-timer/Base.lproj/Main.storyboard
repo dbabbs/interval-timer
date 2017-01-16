@@ -62,7 +62,7 @@
                                                     <color key="titleColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="daN-58-qny" kind="show" id="4Br-a7-4n3"/>
+                                                    <segue destination="daN-58-qny" kind="show" identifier="showWorkoutSegue" id="4Br-a7-4n3"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -121,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="SH8-uj-2y0" detailTextLabel="FM0-ai-tc2" style="IBUITableViewCellStyleValue1" id="yjq-zg-zBF">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="SH8-uj-2y0" detailTextLabel="FM0-ai-tc2" style="IBUITableViewCellStyleValue1" id="yjq-zg-zBF">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yjq-zg-zBF" id="OAh-JH-Vbj">
@@ -151,7 +151,7 @@
                             <outlet property="delegate" destination="uhT-6b-iam" id="YwQ-cE-qOt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Workout" id="CM8-PR-lCz">
+                    <navigationItem key="navigationItem" title="Workout of the Week" id="CM8-PR-lCz">
                         <barButtonItem key="rightBarButtonItem" title="Exit" id="fcL-jI-hui">
                             <connections>
                                 <action selector="dismiss" destination="uhT-6b-iam" id="2ge-bB-0Zm"/>

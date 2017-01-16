@@ -11,9 +11,14 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    let workoutSegueIdentifier = "showWorkoutSegue"
+    
     var timer = Timer()
     var startTime = TimeInterval()
     var player: AVAudioPlayer?
+    
+    var activity:Array< String > = Array < String >()
+    var time:Array< String > = Array < String >()
 
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var intervalText: UILabel!
@@ -22,16 +27,24 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
+    var voiceOptions = ["🔇", "🔊", "👄"]
+    var voiceStatus = "👄"
+    var z = 2
 
 
     var interval = 30
     var music = true;
     var i = 4
     let intervalOptions = [5, 10, 15, 20, 30, 60, 90, 120]
+    var instance = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
         print("The music value is set to: \(music)")
+
 
         progressView.setProgress(0, animated: false)
         intervalText.text = "\(interval)"
@@ -57,6 +70,7 @@ class ViewController: UIViewController {
 
     }
 
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -66,7 +80,16 @@ class ViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate
     }
-
+    
+    func speak(word : String) {
+        let utterance = AVSpeechUtterance(string: word)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
+        
+    }
 
     @IBAction func stop(_ sender: Any) {
         timer.invalidate()
@@ -77,12 +100,22 @@ class ViewController: UIViewController {
     func updateCounter() {
         var elapsedTime: TimeInterval = NSDate.timeIntervalSinceReferenceDate - startTime
         print(round(elapsedTime))
+        var length = activity.count - 1
 
-        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && music && round(elapsedTime) != 0) {
-            playSound()
+        if (round(elapsedTime).truncatingRemainder(dividingBy: Double(interval)) == 0 && round(elapsedTime) != 0) {
+            if voiceStatus == "🔊" {
+                playSound()
+            } else if voiceStatus == "👄" {
+                speak(word: activity[instance])
+            }
             progressView.progress = 0.0
             flashScreen()
+            instance += 1
+            if instance == length {
+                instance = 0
+            }
         }
+        
 
         let minutes = UInt8(elapsedTime / 60.0)
         elapsedTime -= (TimeInterval(minutes) * 60)
@@ -135,15 +168,19 @@ class ViewController: UIViewController {
     func musicControl(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.up:
-                music = true
-                musicStatus.text = "🎹"
             case UISwipeGestureRecognizerDirection.down:
-                music = false
-                musicStatus.text = "❌"
+                if (z - 1 > -1) {
+                    z -= 1
+                }
+            case UISwipeGestureRecognizerDirection.up:
+                if (z + 1 != voiceOptions.count) {
+                    z += 1
+                }
             default:
                 break
             }
+            voiceStatus = voiceOptions[z]
+            musicStatus.text = voiceStatus
         }
     }
     
@@ -159,6 +196,71 @@ class ViewController: UIViewController {
             shutterView.removeFromSuperview()
         })
         print("flashed")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == workoutSegueIdentifier {
+            let destination = segue.destination as? workoutTableViewController
+            destination?.activity = activity
+            destination?.time = time
+            destination?.text = "yo"
+        }
+    }
+    
+    func get_data_from_url(_ link:String) {
+        let url:URL = URL(string: link)!
+        let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (
+            data, response, error) in
+            
+            guard let _:Data = data, let _:URLResponse = response  , error == nil else {
+                
+                return
+            }
+            self.extract_json(data!)
+        }) 
+        task.resume()
+    }
+    
+    func extract_json(_ data: Data) {
+        let json: Any?
+        
+        do {
+            json = try JSONSerialization.jsonObject(with: data, options: [])
+        } catch {
+            return
+        }
+        
+        guard let data_list = json as? NSArray else {
+            return
+        }
+        
+        
+        if let workout_data = json as? NSArray {
+            for i in 0 ..< data_list.count {
+                if let entry = workout_data[i] as? NSDictionary {
+                    if let timeEntry = entry["time"] as? String {
+                        if let activityEntry = entry["activity"] as? String  {
+                            time.append(timeEntry)
+                            activity.append(activityEntry)
+                        }
+                    }
+                }
+            }
+        }
+        
+        DispatchQueue.main.async(execute: {self.refresh()})
+    }
+    
+    func refresh()  {
+        //self.tableView.reloadData()
     }
 
 }
