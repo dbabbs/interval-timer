@@ -5,23 +5,11 @@
    },
    {
       "time": "0:30",
+      "activity": "Twists"
+   },
+   {
+      "time": "0:30",
       "activity": "Plank"
-   },
-   {
-      "time": "0:30",
-      "activity": "Side plank"
-   },
-   {
-      "time": "0:30",
-      "activity": "Side plank"
-   },
-   {
-      "time": "0:30",
-      "activity": "Leg lifts"
-   },
-   {
-      "time": "0:30",
-      "activity": "Twist"
    },
    {
       "time": "0:30",
@@ -29,7 +17,19 @@
    },
    {
       "time": "0:30",
-      "activity": "Sit ups"
+      "activity": "Leg lifts"
+   },
+   {
+      "time": "0:30",
+      "activity": "Twists"
+   },
+   {
+      "time": "0:30",
+      "activity": "Situps"
+   },
+   {
+      "time": "0:30",
+      "activity": "Reverse crunch"
    },
    {
       "time": "0:30",
@@ -41,10 +41,10 @@
    },
    {
       "time": "0:30",
-      "activity": "Sit ups"
+      "activity": "Reverse crunch"
    },
    {
       "time": "0:30",
-      "activity": "Leg lifts"
+      "activity": "Bicycle"
    }
 ]
