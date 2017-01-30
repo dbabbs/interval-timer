@@ -5,15 +5,7 @@
    },
    {
       "time": "0:30",
-      "activity": "Reverse crunch"
-   },
-   {
-      "time": "0:30",
       "activity": "Twists"
-   },
-   {
-      "time": "0:30",
-      "activity": "Leg lifts"
    },
    {
       "time": "0:30",
@@ -21,7 +13,15 @@
    },
    {
       "time": "0:30",
-      "activity": "Reverse crunch"
+      "activity": "Bicycle"
+   },
+   {
+      "time": "0:30",
+      "activity": "Leg lifts"
+   },
+   {
+      "time": "0:30",
+      "activity": "Twists"
    },
    {
       "time": "0:30",
