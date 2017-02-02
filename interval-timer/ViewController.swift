@@ -23,6 +23,10 @@ class ViewController: UIViewController {
     var activity:Array< String > = Array < String >()
     var time:Array< String > = Array < String >()
     
+    @IBOutlet weak var currentActivityLabel: UILabel!
+    @IBOutlet weak var nextActivityLabel: UILabel!
+    
+    
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var intervalText: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
@@ -46,6 +50,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
         print("The music value is set to: \(music)")
@@ -74,6 +80,8 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(downSwipe)
         view.addGestureRecognizer(upSwipe)
         
+        
+        
     }
     
     
@@ -83,6 +91,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func start(_ sender: Any) {
+        self.currentActivityLabel.text = activity[0]
+        self.nextActivityLabel.text = activity[1]
         if paused == false {
             startButton.setTitle("Start",for: .normal)
             paused = true;
@@ -154,9 +164,11 @@ class ViewController: UIViewController {
                 playSound()
             } else if voiceStatus == "👄" || voiceStatus == "🇬🇧"{
                 speak(word: activity[instance])
+                
                 //speak(word: "\(instance)")
                 //print("THIS IS IIIIIIIII: \(instance)")
             }
+            updateActivityText()
             progressView.progress = 0.0
             flashScreen()
             instance += 1
@@ -166,6 +178,17 @@ class ViewController: UIViewController {
         }
         
         
+    }
+    
+    
+    
+    func updateActivityText() {
+        self.currentActivityLabel.text = activity[instance]
+        var c = instance + 1;
+        if c == activity.count {
+            c=0
+        }
+        self.nextActivityLabel.text = activity[c]
     }
     
     func updateCounterText() {
