@@ -13,3 +13,5 @@ Interval timer for workouts. Workout JSON file is updated weekly with new ab wor
 - Screen flash during interval alert
 - Progress bar
 - View current weekly workout plan
+
+v1
