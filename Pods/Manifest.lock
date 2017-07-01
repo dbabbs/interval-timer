@@ -1,12 +1,25 @@
 PODS:
-  - UICircularProgressRing (1.4.3)
+  - KDCircularProgress (1.5.2)
+  - Spring (1.0.3)
 
 DEPENDENCIES:
-  - UICircularProgressRing
+  - KDCircularProgress
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 8201b5c93bd7ebdf4cd18160bcde1e6e88c2be64
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
-  UICircularProgressRing: f90123562efc555f861f9955384a3450e81e82c0
+  KDCircularProgress: 12f677b2deb02409ab48c6cae1898d146b8ad549
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: 8ecf30ee28cdc3e2fbb076d9a3f339c6c43496f1
+PODFILE CHECKSUM: 3fde735fef2cc45e96c5c4d87119fee97193b4dd
 
 COCOAPODS: 1.2.1
