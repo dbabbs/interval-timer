@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A40B8BCF1F05E80B00336858 /* master.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B8BCE1F05E80B00336858 /* master.swift */; };
+		A45FEFAD1F09B80E00793235 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45FEFAC1F09B80E00793235 /* Workout.swift */; };
 		A49203FB1E2AD9BC00E22BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49203FA1E2AD9BC00E22BE0 /* AppDelegate.swift */; };
 		A49203FD1E2AD9BC00E22BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49203FC1E2AD9BC00E22BE0 /* ViewController.swift */; };
 		A49204001E2AD9BC00E22BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49203FE1E2AD9BC00E22BE0 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		A49204051E2AD9BC00E22BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */; };
 		A492040D1E2AE95900E22BE0 /* horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A492040C1E2AE95900E22BE0 /* horn.mp3 */; };
 		A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */; };
-		A4F7A4171F098FC60030D4A7 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */; };
 		D26B1359D3E4B92BFDEC7B4B /* Pods_interval_timer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF64E2D67813B9C42075EFC4 /* Pods_interval_timer.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +23,7 @@
 		358252F68D5B753D0485DC1A /* Pods-interval-timer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-interval-timer.release.xcconfig"; path = "Pods/Target Support Files/Pods-interval-timer/Pods-interval-timer.release.xcconfig"; sourceTree = "<group>"; };
 		937EF844CCFF748FCA121C4D /* Pods-interval-timer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-interval-timer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-interval-timer/Pods-interval-timer.debug.xcconfig"; sourceTree = "<group>"; };
 		A40B8BCE1F05E80B00336858 /* master.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = master.swift; sourceTree = "<group>"; };
+		A45FEFAC1F09B80E00793235 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Workout.swift; path = ../Workout.swift; sourceTree = "<group>"; };
 		A49203F71E2AD9BC00E22BE0 /* interval-timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "interval-timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49203FA1E2AD9BC00E22BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A49203FC1E2AD9BC00E22BE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +33,6 @@
 		A49204061E2AD9BC00E22BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A492040C1E2AE95900E22BE0 /* horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = horn.mp3; sourceTree = "<group>"; };
 		A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutTableViewController.swift; sourceTree = "<group>"; };
-		A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		FF64E2D67813B9C42075EFC4 /* Pods_interval_timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_interval_timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,8 +86,8 @@
 		A49203F91E2AD9BC00E22BE0 /* interval-timer */ = {
 			isa = PBXGroup;
 			children = (
+				A45FEFAC1F09B80E00793235 /* Workout.swift */,
 				A49203FA1E2AD9BC00E22BE0 /* AppDelegate.swift */,
-				A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */,
 				A49203FC1E2AD9BC00E22BE0 /* ViewController.swift */,
 				A492040C1E2AE95900E22BE0 /* horn.mp3 */,
 				A49203FE1E2AD9BC00E22BE0 /* Main.storyboard */,
@@ -228,7 +228,7 @@
 				A49203FD1E2AD9BC00E22BE0 /* ViewController.swift in Sources */,
 				A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */,
 				A49203FB1E2AD9BC00E22BE0 /* AppDelegate.swift in Sources */,
-				A4F7A4171F098FC60030D4A7 /* LeftViewController.swift in Sources */,
+				A45FEFAD1F09B80E00793235 /* Workout.swift in Sources */,
 				A40B8BCF1F05E80B00336858 /* master.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

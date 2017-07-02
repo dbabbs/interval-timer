@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8B24804AA18FFB86D0C70522345E2B58"
+               BlueprintIdentifier = "48DBA4D08C206DFFDBCDBCC31CA94019"
                BuildableName = "Pods_interval_timer.framework"
                BlueprintName = "Pods-interval-timer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B24804AA18FFB86D0C70522345E2B58"
+            BlueprintIdentifier = "48DBA4D08C206DFFDBCDBCC31CA94019"
             BuildableName = "Pods_interval_timer.framework"
             BlueprintName = "Pods-interval-timer"
             ReferencedContainer = "container:Pods.xcodeproj">

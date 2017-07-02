@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 import KDCircularProgress
-import SlideMenuControllerSwift
 
 class ViewController: UIViewController {
     
@@ -68,6 +67,10 @@ class ViewController: UIViewController {
         //timertext
         currentSubTimeLabel.text = "\(seconds)"
         updateText()
+        
+        //load workout
+        Workout.sharedInstance.get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,11 +79,6 @@ class ViewController: UIViewController {
         } else {
             white()
         }
-    }
-    
-    @IBAction func openLeft(_ sender: Any) {
-        self.slideMenuController()?.openLeft()
-        print("action")
     }
     
     override func didReceiveMemoryWarning() {
