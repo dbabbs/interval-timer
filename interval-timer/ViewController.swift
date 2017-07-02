@@ -9,21 +9,24 @@
 import UIKit
 import AVFoundation
 import KDCircularProgress
-import Spring
+import SlideMenuControllerSwift
 
 class ViewController: UIViewController {
     
     //UI
-    var total = 45
-    var interval = 15
-    var seconds = 15 //make this the same as interval!
+    var total = 30
+    var totalSeconds = 30
+    
+    var interval = 10
+    var seconds = 10 //make this the same as interval!
     
     var timer: Timer!
     var greenTimer: Timer!
     var occured = Int()
     
     //Timer time
-    var timeTimer = Timer()
+    var intervalTimer = Timer()
+    var totalTimer = Timer()
     
 
     //UI
@@ -64,6 +67,7 @@ class ViewController: UIViewController {
         
         //timertext
         currentSubTimeLabel.text = "\(seconds)"
+        updateText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +78,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func openLeft(_ sender: Any) {
+        self.slideMenuController()?.openLeft()
+        print("action")
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -196,8 +204,11 @@ class ViewController: UIViewController {
         outerProgress.set(colors: colors.green)
         innerProgress.set(colors: colors.green)
         
-        if timeTimer != nil {
-            timeTimer.invalidate()
+        if intervalTimer != nil {
+            intervalTimer.invalidate()
+        }
+        if totalTimer != nil {
+            totalTimer.invalidate()
         }
         
         /*
@@ -250,21 +261,56 @@ class ViewController: UIViewController {
     //**** Actual Timer ******
     
     func runTimer() {
-        timeTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+        
+        //subtime
+        intervalTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateSubTimer)), userInfo: nil, repeats: true)
+        
+        //main time
+        totalTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
     }
     
-    func updateTimer() {
+    func updateSubTimer() {
+        
+        //sub time
         seconds -= 1
         if seconds == -1 {
             currentSubTimeLabel.text = "0"
         } else {
             currentSubTimeLabel.text = "\(seconds)"
         }
+        
+    }
+    
+    func updateTimer() {
+        //main time
+        totalSeconds -= 1
+        updateText()
+        
+    }
+    
+    func updateText() {
+        let minutesLeft = Int(totalSeconds) / 60 % 60
+        var minutesText = "\(minutesLeft)"
+        if minutesLeft < 10 {
+            minutesText = "0" + "\(minutesLeft)"
+        }
+        
+        let secondsLeft = Int(totalSeconds) % 60
+        var secondsText = "\(secondsLeft)"
+        if secondsLeft < 10 {
+            secondsText = "0" + "\(secondsLeft)"
+        }
+        totalTimeLabel.text = "\(minutesText):\(secondsText)"
     }
     
     func stopTimer() {
-        timeTimer.invalidate()
+        //subtime
+        intervalTimer.invalidate()
         seconds = interval
+        
+        //main time
+        totalTimer.invalidate()
+        totalSeconds = total
     }
     
 }

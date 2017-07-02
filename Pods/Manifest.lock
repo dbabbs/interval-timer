@@ -1,9 +1,11 @@
 PODS:
   - KDCircularProgress (1.5.2)
+  - SlideMenuControllerSwift (3.0.1)
   - Spring (1.0.3)
 
 DEPENDENCIES:
   - KDCircularProgress
+  - SlideMenuControllerSwift
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
@@ -18,8 +20,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   KDCircularProgress: 12f677b2deb02409ab48c6cae1898d146b8ad549
+  SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-PODFILE CHECKSUM: 3fde735fef2cc45e96c5c4d87119fee97193b4dd
+PODFILE CHECKSUM: f11cdc8c91789254449afcda614d8103579644eb
 
 COCOAPODS: 1.2.1

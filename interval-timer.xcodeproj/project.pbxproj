@@ -15,6 +15,7 @@
 		A49204051E2AD9BC00E22BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49204031E2AD9BC00E22BE0 /* LaunchScreen.storyboard */; };
 		A492040D1E2AE95900E22BE0 /* horn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A492040C1E2AE95900E22BE0 /* horn.mp3 */; };
 		A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */; };
+		A4F7A4171F098FC60030D4A7 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */; };
 		D26B1359D3E4B92BFDEC7B4B /* Pods_interval_timer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF64E2D67813B9C42075EFC4 /* Pods_interval_timer.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		A49204061E2AD9BC00E22BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A492040C1E2AE95900E22BE0 /* horn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = horn.mp3; sourceTree = "<group>"; };
 		A4BC87421E2C7A7200102C3A /* workoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = workoutTableViewController.swift; sourceTree = "<group>"; };
+		A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		FF64E2D67813B9C42075EFC4 /* Pods_interval_timer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_interval_timer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				A49203FA1E2AD9BC00E22BE0 /* AppDelegate.swift */,
+				A4F7A4161F098FC60030D4A7 /* LeftViewController.swift */,
 				A49203FC1E2AD9BC00E22BE0 /* ViewController.swift */,
 				A492040C1E2AE95900E22BE0 /* horn.mp3 */,
 				A49203FE1E2AD9BC00E22BE0 /* Main.storyboard */,
@@ -225,6 +228,7 @@
 				A49203FD1E2AD9BC00E22BE0 /* ViewController.swift in Sources */,
 				A4BC87431E2C7A7200102C3A /* workoutTableViewController.swift in Sources */,
 				A49203FB1E2AD9BC00E22BE0 /* AppDelegate.swift in Sources */,
+				A4F7A4171F098FC60030D4A7 /* LeftViewController.swift in Sources */,
 				A40B8BCF1F05E80B00336858 /* master.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

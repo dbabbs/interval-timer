@@ -9,5 +9,6 @@ target 'interval-timer' do
 
   pod 'KDCircularProgress'
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'SlideMenuControllerSwift'
 
 end
