@@ -34,14 +34,21 @@
                                     <constraint firstAttribute="height" constant="170" id="fHy-ub-YNA"/>
                                     <constraint firstAttribute="width" constant="170" id="iz8-Gy-JCT"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="Pop"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="force">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zig" translatesAutoresizingMaskIntoConstraints="NO" id="FP9-Co-gGi">
-                                <rect key="frame" x="322" y="40" width="33" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="7jp-rJ-9D8"/>
-                                    <constraint firstAttribute="width" constant="33" id="IW2-TU-t1h"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="If1-zj-uAg">
                                 <rect key="frame" x="118" y="264" width="140" height="140"/>
                                 <color key="backgroundColor" red="0.23529411764705882" green="0.29803921568627451" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,16 +68,6 @@
                                 <rect key="frame" x="20" y="31" width="30" height="10"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYo-OZ-eEf">
-                                <rect key="frame" x="20" y="594" width="57" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="129-oY-ynx"/>
-                                    <constraint firstAttribute="width" constant="57" id="yIh-AS-Z1t"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leg Lifts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aur-sG-zJJ">
                                 <rect key="frame" x="106" y="134" width="163" height="51"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
@@ -106,14 +103,10 @@
                             <constraint firstItem="S5H-pL-x5J" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Pjf-tw-X3o"/>
                             <constraint firstItem="If1-zj-uAg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qce-VM-d5P"/>
                             <constraint firstItem="If1-zj-uAg" firstAttribute="top" secondItem="Aur-sG-zJJ" secondAttribute="bottom" constant="79" id="XPk-v7-Xlw"/>
-                            <constraint firstItem="FP9-Co-gGi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="Y7i-n7-jdQ"/>
-                            <constraint firstItem="RYo-OZ-eEf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="ZMz-sq-63K"/>
                             <constraint firstItem="KEm-Ns-Cob" firstAttribute="centerX" secondItem="Aur-sG-zJJ" secondAttribute="centerX" id="ctn-Zo-v5M"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KEm-Ns-Cob" secondAttribute="bottom" constant="158" id="df7-f5-HGg"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RYo-OZ-eEf" secondAttribute="bottom" constant="20" id="h1e-p6-HKA"/>
                             <constraint firstItem="KEm-Ns-Cob" firstAttribute="top" secondItem="VDX-bA-PwE" secondAttribute="bottom" constant="49" id="h5i-g8-tF3"/>
                             <constraint firstItem="VDX-bA-PwE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="i96-3r-3Fl"/>
-                            <constraint firstAttribute="trailing" secondItem="FP9-Co-gGi" secondAttribute="trailing" constant="20" id="nqc-0j-eDR"/>
                             <constraint firstItem="VDX-bA-PwE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oBR-90-B8r"/>
                             <constraint firstItem="66P-fL-Ywa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="x44-48-H7d"/>
                             <constraint firstItem="66P-fL-Ywa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zFJ-eB-xku"/>
@@ -121,12 +114,11 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <connections>
+                        <outlet property="barNavigation" destination="kmS-I1-LUD" id="KHV-Ii-oaE"/>
                         <outlet property="currentItem" destination="Aur-sG-zJJ" id="zKq-BE-OsV"/>
                         <outlet property="currentSubTimeLabel" destination="S5H-pL-x5J" id="IzJ-Hc-gZL"/>
-                        <outlet property="intervalLabel" destination="RYo-OZ-eEf" id="jke-ZE-VU5"/>
                         <outlet property="outerCircleOne" destination="66P-fL-Ywa" id="gds-9f-kkk"/>
                         <outlet property="outerCircleTwo" destination="VDX-bA-PwE" id="RHA-LM-FUG"/>
-                        <outlet property="profileImage" destination="FP9-Co-gGi" id="tcu-UP-XEm"/>
                         <outlet property="totalTimeLabel" destination="KEm-Ns-Cob" id="GeH-Yh-oCX"/>
                         <outlet property="triggerButton" destination="If1-zj-uAg" id="ELa-nz-uAN"/>
                     </connections>
@@ -138,6 +130,5 @@
     </scenes>
     <resources>
         <image name="bar" width="48" height="15"/>
-        <image name="zig" width="375" height="375"/>
     </resources>
 </document>

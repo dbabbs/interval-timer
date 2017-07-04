@@ -8,5 +8,7 @@ target 'interval-timer' do
   # Pods for interval-timer
 
   pod 'KDCircularProgress'
+  pod 'RealmSwift'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 
 end

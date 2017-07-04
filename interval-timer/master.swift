@@ -22,3 +22,18 @@ struct colors {
     static let blackStart = UIColor(red:0.22, green:0.22, blue:0.22, alpha:1.0)
     static let black = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0)
 }
+
+var workouts = [
+                "Sit ups",
+                "Reverse crunch",
+                "Plank",
+                "Bicycle",
+                "Leg lifts",
+                "Russian twists",
+                "Climb",
+                "Scissors",
+                "Wipers",
+                "Side plank",
+                "Crunches",
+                "Cross crunches"
+                ]

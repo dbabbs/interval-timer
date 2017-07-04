@@ -9,15 +9,16 @@
 import UIKit
 import AVFoundation
 import KDCircularProgress
+import Spring
 
 class ViewController: UIViewController {
     
     //UI
-    var total = 30
-    var totalSeconds = 30
+    var total = 360
+    var totalSeconds = 360
     
-    var interval = 10
-    var seconds = 10 //make this the same as interval!
+    var interval = 30
+    var seconds = 30 //make this the same as interval!
     
     var timer: Timer!
     var greenTimer: Timer!
@@ -29,16 +30,18 @@ class ViewController: UIViewController {
     
 
     //UI
+    @IBOutlet weak var barNavigation: UIImageView!
+    
+    
     var gradient = CAGradientLayer()
     
-    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var triggerButton: UIButton!
-    @IBOutlet weak var outerCircleOne: UIButton!
+    @IBOutlet weak var outerCircleOne: SpringButton!
     @IBOutlet weak var outerCircleTwo: UIButton!
     @IBOutlet weak var currentItem: UILabel!
     @IBOutlet weak var currentSubTimeLabel: UILabel!
     @IBOutlet weak var totalTimeLabel: UILabel!
-    @IBOutlet weak var intervalLabel: UILabel!
+
     
     //progress label
     var innerProgress: KDCircularProgress!
@@ -48,9 +51,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        barNavigation.isHidden = true
+        
+        if track {
+            black()
+        } else {
+            white()
+        }
+        
         //UI
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
-        profileImage.layer.masksToBounds = true
         
         triggerButton.layer.cornerRadius = triggerButton.frame.width / 2
         triggerButton.layer.masksToBounds = true
@@ -66,20 +75,48 @@ class ViewController: UIViewController {
         
         //timertext
         currentSubTimeLabel.text = "\(seconds)"
-        updateText()
+        updateTimeLabel(seconds: total)
         
         //load workout
-        Workout.sharedInstance.get_data_from_url("https://dbabbs.github.io/interval-timer/workout.json")
+        
+    
+        //Swiping
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.timeSelect))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.timeSelect))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
     
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if track {
-            black()
+    func timeSelect(_ gesture: UIGestureRecognizer) {
+        
+        if !track {
+            if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+                switch swipeGesture.direction {
+                case UISwipeGestureRecognizerDirection.right: //-30
+                    if total > 30 {
+                       total -= 30 
+                    }
+                case UISwipeGestureRecognizerDirection.left: //+30
+                    total += 30
+                default:
+                    break
+                }
+                
+                updateTimeLabel(seconds: total)
+                
+                
+                totalSeconds = total
+            }
         } else {
-            white()
+            //TO DO:
+            //shake animation
         }
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -105,6 +142,8 @@ class ViewController: UIViewController {
             stopTimer()
             innerProgress.isHidden = true
             outerProgress.isHidden = true
+            
+            afterFirst = false
         }
         track = !track
     }
@@ -115,7 +154,6 @@ class ViewController: UIViewController {
         totalTimeLabel.isHidden = false
         currentItem.textColor = colors.white
         totalTimeLabel.textColor = colors.white
-        intervalLabel.textColor = colors.white
         currentSubTimeLabel.isHidden = false
         currentSubTimeLabel.textColor = colors.white
         
@@ -181,7 +219,18 @@ class ViewController: UIViewController {
         
     }
     
+    var afterFirst = false
+    
     func callInner() {
+        
+        if !afterFirst {
+            afterFirst = true
+        } else {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
+
+        
+        currentItem.text = workouts[Int(arc4random_uniform(UInt32(workouts.count)))]
         seconds = interval
         occured += 1
         if (occured > total / interval) {
@@ -201,7 +250,7 @@ class ViewController: UIViewController {
         greenTimer = nil
         outerProgress.set(colors: colors.green)
         innerProgress.set(colors: colors.green)
-        
+
         if intervalTimer != nil {
             intervalTimer.invalidate()
         }
@@ -222,8 +271,8 @@ class ViewController: UIViewController {
     func white() {
         //Hide labels & change color
         currentItem.isHidden = true
-        totalTimeLabel.isHidden = true
-        intervalLabel.textColor = colors.black
+        //totalTimeLabel.isHidden = true
+        totalTimeLabel.textColor = colors.black
         currentSubTimeLabel.isHidden = true
         
         
@@ -241,6 +290,8 @@ class ViewController: UIViewController {
         gradient.removeFromSuperlayer()
         self.view.backgroundColor = colors.white
         transition(item: self.view)
+        
+        
     }
     
     func transition(item: UIView) {
@@ -267,6 +318,7 @@ class ViewController: UIViewController {
         totalTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
     }
     
+    
     func updateSubTimer() {
         
         //sub time
@@ -281,24 +333,35 @@ class ViewController: UIViewController {
     
     func updateTimer() {
         //main time
+        
+        //this is a temporary fix right here:
+        if totalSeconds == total - interval {
+            totalSeconds -= 1
+        }
         totalSeconds -= 1
-        updateText()
+        updateTimeLabel(seconds: totalSeconds)
         
     }
     
-    func updateText() {
-        let minutesLeft = Int(totalSeconds) / 60 % 60
+    
+    func updateTimeLabel(seconds: Int) {
+        let minutesLeft = Int(seconds) / 60 % 60
         var minutesText = "\(minutesLeft)"
         if minutesLeft < 10 {
             minutesText = "0" + "\(minutesLeft)"
         }
         
-        let secondsLeft = Int(totalSeconds) % 60
+        let secondsLeft = Int(seconds) % 60
         var secondsText = "\(secondsLeft)"
         if secondsLeft < 10 {
             secondsText = "0" + "\(secondsLeft)"
         }
-        totalTimeLabel.text = "\(minutesText):\(secondsText)"
+        if secondsLeft < 1 && minutesLeft < 1 {
+            totalTimeLabel.text = "00:00"
+        } else {
+            totalTimeLabel.text = "\(minutesText):\(secondsText)"
+        }
+        print(totalTimeLabel.text)
     }
     
     func stopTimer() {
@@ -309,6 +372,9 @@ class ViewController: UIViewController {
         //main time
         totalTimer.invalidate()
         totalSeconds = total
+        
+        updateTimeLabel(seconds: total)
+        
     }
     
 }
